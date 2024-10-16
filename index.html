@@ -3,7 +3,15 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script type="text/javascript" src="https://ff.kes.v2.scr.kaspersky-labs.com/7EA5E9BB-55E1-4C31-9C21-4943DDFED2E4/main.js?attr=RoeamxH7j0EtcOxgAiN-VGcwFapu7RhEJ4JTil8EURvZd_eOwZ1Zh_-Z6KGll5gEJbapAM6FMRqdv_RHf_nc1A" charset="UTF-8"></script><script src=" https://cdn.jsdelivr.net/npm/split-grid@1.0.11/dist/split-grid.min.js "></script>
+    
+    <!-- CodeMirror CSS y tema Dracula -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/codemirror.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/theme/dracula.min.css">
+    
+    <!-- CodeMirror JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/mode/javascript/javascript.min.js"></script>
+
     <style>
       body { 
         background-color: #f1f1f1;
@@ -18,37 +26,37 @@
       * {
         box-sizing: border-box;
       }
-      *::before, *::after{
+      *::before, *::after {
         box-sizing: inherit;
       }
-      #app{
+      #app {
         font-family: Avenir, Helvetica, Arial, sans-serif;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
       }
-      .grid{
+      .grid {
         display: grid;
         grid-template-columns: 1fr 7px 1fr;
         grid-template-rows: 1fr 7px 1fr;
         height: 100vh;
       }
-      .vertical-gutter{
+      .vertical-gutter {
         cursor: col-resize;
         grid-area: 1 / 2 / 4 / 2;
         border: solid 1px #fff;
       }
-      .horizontal-gutter{
+      .horizontal-gutter {
         cursor: col-resize;
         grid-area: 2 / 1 / 2 / 4;
         border: solid 1px #fff;
       }
-      iframe{
+      iframe {
         width: 100%;
         height: 100%;
         border: 0;
         background: #fff
       }
-      textarea{
+      textarea {
         background-color: #333;
         box-shadow: 0 0 0 .1px rgba(255,255,255, .3);
         color: #fff;
@@ -59,19 +67,19 @@
         height: 100%;
         font-size: 18px;
       }
-      textarea:focus:{
-        outline: o;
+      textarea:focus {
+        outline: none;
       }
-      #js{
+      #js {
         color: #ebe29e;
         font-size: 15px;
         font-weight: bold;
       }
-      #css{
+      #css {
         color: #b0c1e9;
         font-weight: bold;
       }
-      #html{
+      #html {
         color: #b0e9b8;
         font-weight: bold;
       }
@@ -81,88 +89,67 @@
     <div id="app">
       <div class="grid">      
         <div>
-          
-<textarea placeholder="html" id="html">
+          <textarea placeholder="html" id="html">
 <p class="resultado"></p>
 <p class="testVelocidad"></p>
-</textarea>
-          
+          </textarea>
         </div>
         <div>
-          
-<textarea placeholder="js" id="js">
-
-//-----------------------
-// 1. Función Bubble sort
-//-----------------------
-
-// Time Complexity O(n^2)
-// Space Complexity O(1)
-
-var items = [4, 1, 5, 3, 2];
-  
-function sort(arr) {
-    var items = arr.slice();
-    for (var i = 0; i < items.length; i++) {
-        for (var j = i + 1; j < items.length; j++) {
-            if (items[j] < items[i]) {
-                var tmp = items[j];
-                items[j] = items[i];
-                items[i] = tmp;
+          <textarea placeholder="js" id="js">
+            //-----------------------
+            // 1. Función Bubble sort
+            //-----------------------
+            
+            var items = [4, 1, 5, 3, 2];
+            function sort(arr) {
+                var items = arr.slice();
+                for (var i = 0; i < items.length; i++) {
+                    for (var j = i + 1; j < items.length; j++) {
+                        if (items[j] < items[i]) {
+                            var tmp = items[j];
+                            items[j] = items[i];
+                            items[i] = tmp;
+                        }
+                    }           
+                }
+                return items; 
             }
-        }           
-    }
-    return items; 
-}
-
-//--------------------------- 
-// 2. Ejecución de la función y mostrar el resultado en el cuerpo del documento
-//---------------------------
-  
-var resultado = sort(items);
-// sortItems is [1, 2, 3, 4, 5]
-var resultadoHTML = document.createElement('p');
-resultadoHTML.id = 'resultado'; // Asigna el ID que desees
-if (resultado !== null) {
-  resultadoHTML.textContent = 'El elemento se encuentra en la posición: ' + resultado + ' :)';
-} else {
-  resultadoHTML.textContent = 'El elemento no se encuentra en el array :(';
-}
-document.body.appendChild(resultadoHTML);
-
-//---------------------
-// 3. Test de velocidad
-//---------------------
-  
-var i = 0;
-items = Array.apply(null, Array(200)).map(function () { return ++i });
-var tmp = items[5];
-items[5] = items[6];
-items[6] = tmp;
-var count = 10000;
-var start = new Date();
-for (i = 0; i < count; i++)
-    sort(items);
-var milliseconds = (new Date()) - start;
-var testVelocidadHTML = document.createElement('p');
-testVelocidadHTML.id = 'testVelocidad'; // Asigna el ID que desees
-testVelocidadHTML.textContent = 'Test de velocidad en milisegundos: ' + milliseconds;
-document.body.appendChild(testVelocidadHTML);  
-  
-</textarea>
-          
+            
+            var resultado = sort(items);
+            var resultadoHTML = document.createElement('p');
+            resultadoHTML.id = 'resultado';
+            if (resultado !== null) {
+              resultadoHTML.textContent = 'El elemento se encuentra en la posición: ' + resultado + ' :)';
+            } else {
+              resultadoHTML.textContent = 'El elemento no se encuentra en el array :(';
+            }
+            document.body.appendChild(resultadoHTML);
+            
+            var i = 0;
+            items = Array.apply(null, Array(200)).map(function () { return ++i });
+            var tmp = items[5];
+            items[5] = items[6];
+            items[6] = tmp;
+            var count = 10000;
+            var start = new Date();
+            for (i = 0; i < count; i++)
+                sort(items);
+            var milliseconds = (new Date()) - start;
+            var testVelocidadHTML = document.createElement('p');
+            testVelocidadHTML.id = 'testVelocidad';
+            testVelocidadHTML.textContent = 'Test de velocidad en milisegundos: ' + milliseconds;
+            document.body.appendChild(testVelocidadHTML);  
+          </textarea>
         </div>
         <div>
-          
-<textarea placeholder="css" id="css">
-p{
+          <textarea placeholder="css" id="css">
+p {
   font-family: helvetica;
   color: green;
-  font-size:18px;
+  font-size: 18px;
   font-weight: bold;
 }
-</textarea>
-          
+          </textarea>
         </div>
         <div>
           <iframe srcdoc="<h1>hola! edita el JS en la ejecución de la función search</h1><h2>search(items, 17)</h2>"></iframe>
@@ -170,8 +157,9 @@ p{
         <div class="vertical-gutter"></div>
         <div class="horizontal-gutter"></div>
       </div>
-  </div>
-  <script type="module" src="main.js"></script>
+    </div>
+
+    <script type="module" src="main.js"></script>
     <script>
       Split({
         columnGutters: [{
@@ -182,7 +170,14 @@ p{
           track: 1,
           element: document.querySelector('.horizontal-gutter'),
         }]
-      })
+      });
+
+      // Inicializa CodeMirror para la sección JavaScript
+      var jsEditor = CodeMirror.fromTextArea(document.getElementById("js"), {
+        mode: "javascript",
+        theme: "dracula",
+        lineNumbers: true
+      });
     </script>
- </body>
+  </body>
 </html>
